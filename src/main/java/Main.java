@@ -10,8 +10,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         DBService dbService = new DBServiceHibernateImpl();
         final SessionFactory sessionFactory;
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
@@ -22,12 +26,33 @@ public class Main {
 
         sessionFactory = createSessionFactory(configuration);
 
-        Recipe recipe = new Recipe("")
+        Recipe recipe = new Recipe(
+                "Курочка в чесночном соусе"
+                ,""
+                ,"Отбей толстую часть куриной грудки для того, чтобы толщина всего куска была равномерной.\n" +
+                "2. Смешай в чашке воду, лимонный сок и мелко нарезанный чеснок, подогрей всё в микроволновке и хорошо перемешай.\n"
+                ,new SimpleDateFormat("HH:mm:ss").parse("00:30:00")
+                ,0
+                ,0
+                ,0
+                ,""
+        );
+        Ingredient ingredient = new Ingredient(
+            "Курица"
+                ,170
+        );
+
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setRecipe(recipe);
+        recipeIngredient.setIngredient(ingredient);
+        recipeIngredient.setAmount(150);
+
+
 
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
-            session.save();
+            session.save(recipeIngredient);
             transaction.commit();
 
         }

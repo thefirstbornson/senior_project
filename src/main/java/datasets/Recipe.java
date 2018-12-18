@@ -1,6 +1,7 @@
 package datasets;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Recipe {
 
     @Column(name="cooktime", columnDefinition="TIME")
     @Temporal(TemporalType.TIME)
-    private Date cooktime;
+    private  Date cooktime;
 
     @Column(name="level_id")
     private int level_id;
@@ -48,9 +49,9 @@ public class Recipe {
     }
 
     @OneToMany(mappedBy = "recipe")
-    private Set<RecipeIngredient> recipeIngredients = new HashSet<RecipeIngredient>();
+    private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
 
-    public Recipe(){};
+    public Recipe(){}
 
     public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
         this.recipeIngredients.add(recipeIngredient);
@@ -128,7 +129,8 @@ public class Recipe {
         this.imagepath = imagepath;
     }
 
-    public Recipe(String name, String description, String instructions, Date cooktime, int level_id, int cousine_id, int rating, String imagepath) {
+    public Recipe(String name, String description, String instructions, Date cooktime
+            , int level_id, int cousine_id, int rating, String imagepath) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;
