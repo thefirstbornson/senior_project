@@ -1,6 +1,8 @@
 package datasets;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tblIngredient")
@@ -16,7 +18,16 @@ public class Ingredient {
     @Column(name="calories_per_100g")
     private int calrsPer100;
 
+    @OneToMany(mappedBy = "ingredient")
+    private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
+
+
     public Ingredient(){}
+
+    public Ingredient(String name, int calrsPer100) {
+        this.name = name;
+        this.calrsPer100 = calrsPer100;
+    }
 
     public long getId() {
         return id;
@@ -42,8 +53,7 @@ public class Ingredient {
         this.calrsPer100 = calrsPer100;
     }
 
-    public Ingredient(String name, int calrsPer100) {
-        this.name = name;
-        this.calrsPer100 = calrsPer100;
+    public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
+        this.recipeIngredients.add(recipeIngredient);
     }
 }

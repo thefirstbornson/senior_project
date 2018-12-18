@@ -1,8 +1,7 @@
-import datasets.Ingredient;
-import datasets.Recipe;
-import datasets.RecipeIngredient;
+import datasets.*;
 import dbservice.DBService;
 import dbservice.DBServiceHibernateImpl;
+import org.hibernate.CustomEntityDirtinessStrategy;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,8 +22,22 @@ public class Main {
         configuration.addAnnotatedClass(Recipe.class);
         configuration.addAnnotatedClass(Ingredient.class);
         configuration.addAnnotatedClass(RecipeIngredient.class);
+        configuration.addAnnotatedClass(Level.class);
+        configuration.addAnnotatedClass(Cuisine.class);
+        configuration.addAnnotatedClass(Course.class);
+        configuration.addAnnotatedClass(RecipeCourse.class);
+        configuration.addAnnotatedClass(FoodCategory.class);
+        configuration.addAnnotatedClass(RecipeFoodCategory.class);
+        configuration.addAnnotatedClass(Meal.class);
+        configuration.addAnnotatedClass(RecipeMeal.class);
 
         sessionFactory = createSessionFactory(configuration);
+        Level level = new Level(5);
+        Cuisine cuisine = new Cuisine("Испанская кухня");
+        Course course = new Course("Основное блюдо");
+        FoodCategory foodCategory = new FoodCategory("Птица");
+        Meal meal = new Meal("Обед");
+
 
         Recipe recipe = new Recipe(
                 "Курочка в чесночном соусе"
@@ -32,8 +45,8 @@ public class Main {
                 ,"Отбей толстую часть куриной грудки для того, чтобы толщина всего куска была равномерной.\n" +
                 "2. Смешай в чашке воду, лимонный сок и мелко нарезанный чеснок, подогрей всё в микроволновке и хорошо перемешай.\n"
                 ,new SimpleDateFormat("HH:mm:ss").parse("00:30:00")
-                ,0
-                ,0
+                ,level
+                ,cuisine
                 ,0
                 ,""
         );
@@ -41,21 +54,34 @@ public class Main {
             "Курица"
                 ,170
         );
+        RecipeCourse recipeCourse = new RecipeCourse();
+        recipeCourse.setRecipe(recipe);
+        recipeCourse.setCourse(course);
 
+        RecipeFoodCategory recipeFoodCategory = new RecipeFoodCategory();
+        recipeFoodCategory.setRecipe(recipe);
+        recipeFoodCategory.setFoodCategory(foodCategory);
+
+        RecipeMeal recipeMeal = new RecipeMeal();
+        recipeMeal.setRecipe(recipe);
+        recipeMeal.setMeal(meal);
         RecipeIngredient recipeIngredient = new RecipeIngredient();
         recipeIngredient.setRecipe(recipe);
         recipeIngredient.setIngredient(ingredient);
         recipeIngredient.setAmount(150);
 
-
-
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.save(recipeIngredient);
+            session.save(recipeCourse);
+            session.save(recipeFoodCategory);
+            session.save(recipeMeal);
             transaction.commit();
 
         }
+        System.out.println(recipe.getRecipeCourses());
+        System.out.println(recipe.getRecipeFoodCategories());
     }
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
