@@ -30,14 +30,22 @@ public class Main {
         configuration.addAnnotatedClass(RecipeFoodCategory.class);
         configuration.addAnnotatedClass(Meal.class);
         configuration.addAnnotatedClass(RecipeMeal.class);
+        configuration.addAnnotatedClass(NutritionInformation.class);
+        configuration.addAnnotatedClass(IngredientNutritionInformation.class);
+        configuration.addAnnotatedClass(Measurement.class);
 
         sessionFactory = createSessionFactory(configuration);
+
         Level level = new Level(5);
         Cuisine cuisine = new Cuisine("Испанская кухня");
         Course course = new Course("Основное блюдо");
         FoodCategory foodCategory = new FoodCategory("Птица");
         Meal meal = new Meal("Обед");
-
+        Ingredient ingredient = new Ingredient("Курица");
+        NutritionInformation protein =new NutritionInformation("Белки");
+        NutritionInformation fat =new NutritionInformation("Жиры");
+        NutritionInformation carbohydrate=new NutritionInformation("Углеводы");
+        Measurement measurement = new Measurement("г");
 
         Recipe recipe = new Recipe(
                 "Курочка в чесночном соусе"
@@ -50,10 +58,20 @@ public class Main {
                 ,0
                 ,""
         );
-        Ingredient ingredient = new Ingredient(
-            "Курица"
-                ,170
-        );
+
+        IngredientNutritionInformation ingrInf1 = new IngredientNutritionInformation();
+        ingrInf1.setIngredient(ingredient);
+        ingrInf1.setNutritionanInformation(protein);
+        ingrInf1.setAmount(15);
+        IngredientNutritionInformation ingrInf2 = new IngredientNutritionInformation();
+        ingrInf2.setIngredient(ingredient);
+        ingrInf2.setNutritionanInformation(fat);
+        ingrInf2.setAmount(5);
+        IngredientNutritionInformation ingrInf3 = new IngredientNutritionInformation();
+        ingrInf3.setIngredient(ingredient);
+        ingrInf3.setNutritionanInformation(carbohydrate);
+        ingrInf3.setAmount(25);
+
         RecipeCourse recipeCourse = new RecipeCourse();
         recipeCourse.setRecipe(recipe);
         recipeCourse.setCourse(course);
@@ -69,6 +87,7 @@ public class Main {
         recipeIngredient.setRecipe(recipe);
         recipeIngredient.setIngredient(ingredient);
         recipeIngredient.setAmount(150);
+        recipeIngredient.setMeasurement(measurement);
 
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
@@ -77,6 +96,9 @@ public class Main {
             session.save(recipeCourse);
             session.save(recipeFoodCategory);
             session.save(recipeMeal);
+            session.save(ingrInf1);
+            session.save(ingrInf2);
+            session.save(ingrInf3);
             transaction.commit();
 
         }

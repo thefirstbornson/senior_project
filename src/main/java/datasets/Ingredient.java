@@ -15,18 +15,13 @@ public class Ingredient {
     @Column(name="name")
     private String name;
 
-    @Column(name="calories_per_100g")
-    private int calrsPer100;
-
     @OneToMany(mappedBy = "ingredient")
     private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
 
-
     public Ingredient(){}
 
-    public Ingredient(String name, int calrsPer100) {
+    public Ingredient(String name) {
         this.name = name;
-        this.calrsPer100 = calrsPer100;
     }
 
     public long getId() {
@@ -43,14 +38,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getCalrsPer100() {
-        return calrsPer100;
-    }
-
-    public void setCalrsPer100(int calrsPer100) {
-        this.calrsPer100 = calrsPer100;
     }
 
     public void addRecipeIngredient(RecipeIngredient recipeIngredient) {

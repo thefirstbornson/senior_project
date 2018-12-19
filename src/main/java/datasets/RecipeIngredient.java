@@ -22,8 +22,9 @@ public class RecipeIngredient {
     @Column(name="amount")
     private int amount;
 
-    @Column(name="measurement_id")
-    private int measurementId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "measurement_id")
+    private Measurement measurement;
 
     public long getId() {
         return id;
@@ -55,5 +56,13 @@ public class RecipeIngredient {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Measurement getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(Measurement measurement) {
+        this.measurement = measurement;
     }
 }
