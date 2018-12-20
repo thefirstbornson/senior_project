@@ -3,8 +3,8 @@ package datasets;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tblIngredientNutritionanInformation")
-public class IngredientNutritionInformation {
+@Table(name = "tblingredientnutritionalinformation")
+public class IngredientNutritionalInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="rni_id")
@@ -16,12 +16,12 @@ public class IngredientNutritionInformation {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "ni_id")
-    private NutritionInformation nutrition;
+    private NutritionalInformation nutrition;
 
     @Column(name="amount")
     private int amount;
 
-    public IngredientNutritionInformation() {
+    public IngredientNutritionalInformation() {
     }
 
     public long getId() {
@@ -36,11 +36,11 @@ public class IngredientNutritionInformation {
         this.ingredient = ingredient;
     }
 
-    public NutritionInformation getNutritionanInformation() {
+    public NutritionalInformation getNutritionanInformation() {
         return nutrition;
     }
 
-    public void setNutritionanInformation(NutritionInformation nutritionanInformation) {
+    public void setNutritionanInformation(NutritionalInformation nutritionanInformation) {
         this.nutrition = nutritionanInformation;
     }
 

@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tblNutritionInformation")
-public class NutritionInformation {
+@Table(name = "tblnutritionalInformation")
+public class NutritionalInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nutrition_infromation_id")
@@ -17,12 +17,12 @@ public class NutritionInformation {
 
 
     @OneToMany(mappedBy = "nutrition")
-    private Set<IngredientNutritionInformation> ingredientsNutritionInformation = new HashSet<>();
+    private Set<IngredientNutritionalInformation> ingredientsNutritionInformation = new HashSet<>();
 
-    public NutritionInformation() {
+    public NutritionalInformation() {
     }
 
-    public NutritionInformation(String nutrition) {
+    public NutritionalInformation(String nutrition) {
         this.nutrition = nutrition;
     }
 
@@ -39,11 +39,11 @@ public class NutritionInformation {
         this.nutrition = nutrition;
     }
 
-    public Set<IngredientNutritionInformation> getIngredientsNutritionInformation() {
+    public Set<IngredientNutritionalInformation> getIngredientsNutritionInformation() {
         return ingredientsNutritionInformation;
     }
 
-    public void setIngredientsNutritionInformation(Set<IngredientNutritionInformation> ingredientsNutritionInformation) {
+    public void setIngredientsNutritionInformation(Set<IngredientNutritionalInformation> ingredientsNutritionInformation) {
         this.ingredientsNutritionInformation = ingredientsNutritionInformation;
     }
 }

@@ -1,7 +1,6 @@
 import datasets.*;
 import dbservice.DBService;
 import dbservice.DBServiceHibernateImpl;
-import org.hibernate.CustomEntityDirtinessStrategy;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,7 +8,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -30,8 +28,8 @@ public class Main {
         configuration.addAnnotatedClass(RecipeFoodCategory.class);
         configuration.addAnnotatedClass(Meal.class);
         configuration.addAnnotatedClass(RecipeMeal.class);
-        configuration.addAnnotatedClass(NutritionInformation.class);
-        configuration.addAnnotatedClass(IngredientNutritionInformation.class);
+        configuration.addAnnotatedClass(NutritionalInformation.class);
+        configuration.addAnnotatedClass(IngredientNutritionalInformation.class);
         configuration.addAnnotatedClass(Measurement.class);
 
         sessionFactory = createSessionFactory(configuration);
@@ -42,10 +40,12 @@ public class Main {
         FoodCategory foodCategory = new FoodCategory("Птица");
         Meal meal = new Meal("Обед");
         Ingredient ingredient = new Ingredient("Курица");
-        NutritionInformation protein =new NutritionInformation("Белки");
-        NutritionInformation fat =new NutritionInformation("Жиры");
-        NutritionInformation carbohydrate=new NutritionInformation("Углеводы");
+        NutritionalInformation protein =new NutritionalInformation("Белки");
+        NutritionalInformation fat =new NutritionalInformation("Жиры");
+        NutritionalInformation carbohydrate=new NutritionalInformation("Углеводы");
         Measurement measurement = new Measurement("г");
+
+
 
         Recipe recipe = new Recipe(
                 "Курочка в чесночном соусе"
@@ -59,15 +59,15 @@ public class Main {
                 ,""
         );
 
-        IngredientNutritionInformation ingrInf1 = new IngredientNutritionInformation();
+        IngredientNutritionalInformation ingrInf1 = new IngredientNutritionalInformation();
         ingrInf1.setIngredient(ingredient);
         ingrInf1.setNutritionanInformation(protein);
         ingrInf1.setAmount(15);
-        IngredientNutritionInformation ingrInf2 = new IngredientNutritionInformation();
+        IngredientNutritionalInformation ingrInf2 = new IngredientNutritionalInformation();
         ingrInf2.setIngredient(ingredient);
         ingrInf2.setNutritionanInformation(fat);
         ingrInf2.setAmount(5);
-        IngredientNutritionInformation ingrInf3 = new IngredientNutritionInformation();
+        IngredientNutritionalInformation ingrInf3 = new IngredientNutritionalInformation();
         ingrInf3.setIngredient(ingredient);
         ingrInf3.setNutritionanInformation(carbohydrate);
         ingrInf3.setAmount(25);
