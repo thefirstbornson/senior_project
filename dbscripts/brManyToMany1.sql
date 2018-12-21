@@ -91,21 +91,22 @@ create table tblIngredientNutritionalInformation (
     )
     ENGINE=InnoDB DEFAULT CHARSET=utf8; 
     
+    -- ####################### composite primary key in link tables for ManyToMany connection in Hibernate #######################
+    
 create table tblRecipeCourse (
-	recipe_course_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     recipe_id INT NOT NULL, 
 	course_id INT NOT NULL,
+     PRIMARY KEY (recipe_id,course_id),
      CONSTRAINT fk_rc_recipe FOREIGN KEY(recipe_id) REFERENCES tblRecipe(recipe_id),
      CONSTRAINT fk_rc_course FOREIGN KEY(course_id) REFERENCES tblCourse(course_id)
     )
     ENGINE=InnoDB DEFAULT CHARSET=utf8;   
     
-
     
 create table tblRecipeFoodCategory (
-	rcp_food_category_id  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     recipe_id INT NOT NULL, 
     food_category_id INT NOT NULL, 
+      PRIMARY KEY (recipe_id,food_category_id),
       CONSTRAINT fk_rfc_recipe FOREIGN KEY(recipe_id) REFERENCES tblRecipe(recipe_id),
       CONSTRAINT fk_rfc_food_category FOREIGN KEY(food_category_id) REFERENCES tblFoodCategory(food_category_id)
     )
@@ -113,9 +114,9 @@ create table tblRecipeFoodCategory (
     
     
 create table tblRecipeMeals (
-    recipe_meal_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     recipe_id INT NOT NULL, 
 	meal_id INT NOT NULL,
+      PRIMARY KEY (recipe_id,meal_id),
       CONSTRAINT fk_rm_recipe FOREIGN KEY(recipe_id) REFERENCES tblRecipe(recipe_id),
       CONSTRAINT fk_rm_meal FOREIGN KEY(meal_id) REFERENCES tblMeal(meal_id)
     )
