@@ -53,8 +53,14 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
 
-    @OneToMany(mappedBy = "recipe")
-    private Set<RecipeCourse> recipeCourses = new HashSet<>();
+//    @OneToMany(mappedBy = "recipe")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "tblRecipeCourse"
+           ,joinColumns = @JoinColumn(name="recipe_id")
+           ,inverseJoinColumns = @JoinColumn(name = "course_id" )
+    )
+    private Set<Course> recipeCourses = new HashSet<>();
 
     @OneToMany(mappedBy = "recipe")
     private Set<RecipeFoodCategory> recipeFoodCategories = new HashSet<>();
@@ -68,8 +74,8 @@ public class Recipe {
         this.recipeIngredients.add(recipeIngredient);
     }
 
-    public void addRecipeCourse (RecipeCourse recipeCourse){
-        this.recipeCourses.add(recipeCourse);
+    public void addCourse (Course course){
+        this.recipeCourses.add(course);
     }
 
     public void addRecipeFoodCategory (RecipeFoodCategory recipeFoodCategory){
@@ -79,7 +85,8 @@ public class Recipe {
     public void addRecipeMeal (RecipeMeal recipeMeal){
         this.recipeMeals.add(recipeMeal);
     }
-    public Set<RecipeCourse> getRecipeCourses() {
+
+    public Set<Course> getRecipeCourses() {
         return recipeCourses;
     }
 
