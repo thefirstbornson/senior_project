@@ -25,9 +25,9 @@ public class Main {
         configuration.addAnnotatedClass(Course.class);
        // configuration.addAnnotatedClass(RecipeCourse.class);
         configuration.addAnnotatedClass(FoodCategory.class);
-        configuration.addAnnotatedClass(RecipeFoodCategory.class);
+       //configuration.addAnnotatedClass(RecipeFoodCategory.class);
         configuration.addAnnotatedClass(Meal.class);
-        configuration.addAnnotatedClass(RecipeMeal.class);
+       //configuration.addAnnotatedClass(RecipeMeal.class);
         configuration.addAnnotatedClass(NutritionalInformation.class);
         configuration.addAnnotatedClass(IngredientNutritionalInformation.class);
         configuration.addAnnotatedClass(Measurement.class);
@@ -37,13 +37,13 @@ public class Main {
         Level level = new Level(5);
         Cuisine cuisine = new Cuisine("Испанская кухня");
         Course course = new Course("Основное блюдо");
-//        FoodCategory foodCategory = new FoodCategory("Птица");
-//        Meal meal = new Meal("Обед");
-//        Ingredient ingredient = new Ingredient("Курица");
-//        NutritionalInformation protein =new NutritionalInformation("Белки");
-//        NutritionalInformation fat =new NutritionalInformation("Жиры");
-//        NutritionalInformation carbohydrate=new NutritionalInformation("Углеводы");
-//        Measurement measurement = new Measurement("г");
+        FoodCategory foodCategory = new FoodCategory("Птица");
+        Meal meal = new Meal("Обед");
+        Ingredient ingredient = new Ingredient("Курица");
+        NutritionalInformation protein =new NutritionalInformation("Белки");
+        NutritionalInformation fat =new NutritionalInformation("Жиры");
+        NutritionalInformation carbohydrate=new NutritionalInformation("Углеводы");
+        Measurement measurement = new Measurement("г");
 
         Recipe recipe = new Recipe(
                 "Курочка в чесночном соусе"
@@ -57,19 +57,21 @@ public class Main {
                 ,""
         );
         recipe.addCourse(course);
+        recipe.addFoodCategory(foodCategory);
+        recipe.addMeal(meal);
 
-//        IngredientNutritionalInformation ingrInf1 = new IngredientNutritionalInformation();
-//        ingrInf1.setIngredient(ingredient);
-//        ingrInf1.setNutritionanInformation(protein);
-//        ingrInf1.setAmount(15);
-//        IngredientNutritionalInformation ingrInf2 = new IngredientNutritionalInformation();
-//        ingrInf2.setIngredient(ingredient);
-//        ingrInf2.setNutritionanInformation(fat);
-//        ingrInf2.setAmount(5);
-//        IngredientNutritionalInformation ingrInf3 = new IngredientNutritionalInformation();
-//        ingrInf3.setIngredient(ingredient);
-//        ingrInf3.setNutritionanInformation(carbohydrate);
-//        ingrInf3.setAmount(25);
+        IngredientNutritionalInformation ingrInf1 = new IngredientNutritionalInformation();
+        ingrInf1.setIngredient(ingredient);
+        ingrInf1.setNutritionanInformation(protein);
+        ingrInf1.setAmount(15);
+        IngredientNutritionalInformation ingrInf2 = new IngredientNutritionalInformation();
+        ingrInf2.setIngredient(ingredient);
+        ingrInf2.setNutritionanInformation(fat);
+        ingrInf2.setAmount(5);
+        IngredientNutritionalInformation ingrInf3 = new IngredientNutritionalInformation();
+        ingrInf3.setIngredient(ingredient);
+        ingrInf3.setNutritionanInformation(carbohydrate);
+        ingrInf3.setAmount(25);
 
 //        RecipeCourse recipeCourse = new RecipeCourse();
 //        recipeCourse.setRecipe(recipe);
@@ -82,27 +84,28 @@ public class Main {
 //        RecipeMeal recipeMeal = new RecipeMeal();
 //        recipeMeal.setRecipe(recipe);
 //        recipeMeal.setMeal(meal);
-//        RecipeIngredient recipeIngredient = new RecipeIngredient();
-//        recipeIngredient.setRecipe(recipe);
-//        recipeIngredient.setIngredient(ingredient);
-//        recipeIngredient.setAmount(150);
-//        recipeIngredient.setMeasurement(measurement);
+
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setRecipe(recipe);
+        recipeIngredient.setIngredient(ingredient);
+        recipeIngredient.setAmount(150);
+        recipeIngredient.setMeasurement(measurement);
 
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.save(recipe);
-//            session.save(recipeIngredient);
+            session.save(recipeIngredient);
 //            //session.save(recipeCourse);
 //            session.save(recipeFoodCategory);
 //            session.save(recipeMeal);
-//            session.save(ingrInf1);
-//            session.save(ingrInf2);
-//            session.save(ingrInf3);
+            session.save(ingrInf1);
+            session.save(ingrInf2);
+            session.save(ingrInf3);
             transaction.commit();
 
         }
-//        System.out.println(recipe.getRecipeCourses());
+//        System.out.println(recipe.getCourses());
 //        System.out.println(recipe.getRecipeFoodCategories());
     }
 

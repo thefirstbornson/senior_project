@@ -2,7 +2,6 @@ package datasets;
 
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,20 +52,30 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
 
-//    @OneToMany(mappedBy = "recipe")
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "tblRecipeCourse"
            ,joinColumns = @JoinColumn(name="recipe_id")
            ,inverseJoinColumns = @JoinColumn(name = "course_id" )
     )
-    private Set<Course> recipeCourses = new HashSet<>();
+    private Set<Course> courses = new HashSet<>();
 
-    @OneToMany(mappedBy = "recipe")
-    private Set<RecipeFoodCategory> recipeFoodCategories = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "tblRecipeFoodCategory"
+            ,joinColumns = @JoinColumn(name="recipe_id")
+            ,inverseJoinColumns = @JoinColumn(name = "food_category_id" )
+    )
+    private Set<FoodCategory> foodCategories= new HashSet<>();
 
-    @OneToMany(mappedBy = "recipe")
-    private Set<RecipeMeal> recipeMeals = new HashSet<>();
+//    @OneToMany(mappedBy = "recipe")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "tblRecipeMeals"
+            ,joinColumns = @JoinColumn(name="recipe_id")
+            ,inverseJoinColumns = @JoinColumn(name = "meal_id" )
+)
+    private Set<Meal> meals = new HashSet<>();
 
     public Recipe(){}
 
@@ -75,23 +84,31 @@ public class Recipe {
     }
 
     public void addCourse (Course course){
-        this.recipeCourses.add(course);
+        this.courses.add(course);
     }
 
-    public void addRecipeFoodCategory (RecipeFoodCategory recipeFoodCategory){
-        this.recipeFoodCategories.add(recipeFoodCategory);
+    public void addFoodCategory (FoodCategory FoodCategory){
+        this.foodCategories.add(FoodCategory);
     }
 
-    public void addRecipeMeal (RecipeMeal recipeMeal){
-        this.recipeMeals.add(recipeMeal);
+    public void addMeal (Meal meal){
+        this.meals.add(meal);
     }
 
-    public Set<Course> getRecipeCourses() {
-        return recipeCourses;
+    public Set<Course> getCourses() {
+        return courses;
     }
 
-    public Set<RecipeFoodCategory> getRecipeFoodCategories() {
-        return recipeFoodCategories;
+    public Set<FoodCategory> getFoodCategories() {
+        return foodCategories;
+    }
+
+    public Set<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(Set<Meal> meals) {
+        this.meals = meals;
     }
 
     public long getId() {

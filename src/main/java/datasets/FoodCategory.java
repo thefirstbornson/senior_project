@@ -15,8 +15,8 @@ public class FoodCategory {
     @Column(name="food_category")
     private String foodCategory;
 
-    @OneToMany(mappedBy = "foodCategory")
-    private Set<RecipeFoodCategory> recipeFoodCategorys = new HashSet<>();
+//    @OneToMany(mappedBy = "foodCategory")
+//    private Set<RecipeFoodCategory> recipeFoodCategorys = new HashSet<>();
 
 
     public FoodCategory() {
@@ -26,9 +26,9 @@ public class FoodCategory {
         this.foodCategory = foodCategory;
     }
 
-    public void addRecipeFoodCategory(RecipeFoodCategory recipeFoodCategory) {
-        this.recipeFoodCategorys.add(recipeFoodCategory);
-    }
+//    public void addRecipeFoodCategory(RecipeFoodCategory recipeFoodCategory) {
+//        this.recipeFoodCategorys.add(recipeFoodCategory);
+//    }
 
     public long getId() {
         return id;
@@ -42,13 +42,13 @@ public class FoodCategory {
         this.foodCategory = foodCategory;
     }
 
-    public Set<RecipeFoodCategory> getRecipeFoodCategory() {
-        return recipeFoodCategorys;
-    }
-
-    public void setRecipeFoodCategory(Set<RecipeFoodCategory> recipeFoodCategory) {
-        this.recipeFoodCategorys = recipeFoodCategory;
-    }
+//    public Set<RecipeFoodCategory> getRecipeFoodCategory() {
+//        return recipeFoodCategorys;
+//    }
+//
+//    public void setRecipeFoodCategory(Set<RecipeFoodCategory> recipeFoodCategory) {
+//        this.recipeFoodCategorys = recipeFoodCategory;
+//    }
 
 
 }
