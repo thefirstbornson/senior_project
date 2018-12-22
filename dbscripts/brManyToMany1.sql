@@ -58,7 +58,7 @@ CREATE TABLE tblRecipe(
     name VARCHAR(25),
     description VARCHAR(50),
     instructions VARCHAR(500),
-    cooktime TIME NULL,
+    cooktime INT NULL,
     level_id INT NULL,
     cuisine_id INT NULL,
     rating INT,
@@ -121,3 +121,28 @@ create table tblRecipeMeals (
       CONSTRAINT fk_rm_meal FOREIGN KEY(meal_id) REFERENCES tblMeal(meal_id)
     )
 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    
+    
+    INSERT INTO tblCourse (course) VALUES('суп'), ('основное блюдо'), ('салат'),('гарнир'),('десерт'),('напиток'),('гарнир');
+    INSERT INTO tblFoodCategory (food_category) VALUES('молочные продукты'), ('фрукты'), ('овощи'),('злаковые'),('птица'),('мясо');
+    INSERT INTO tblMeal (meal) VALUES('завтрак'), ('обед'), ('ужин'),('перекус');
+    INSERT INTO tblLevel (level_id) VALUES(0), (1), (2),(3);
+    INSERT INTO tblCuisine (cuisine) VALUES('европейская'), ('средиземноморская'), ('мексиканская'),('русская');
+    INSERT INTO tblMeasurement (name) VALUES('гр.'), ('мл.');
+    INSERT INTO tblIngredient (name) VALUES ('творог'), ('бананы'), ('яйца'), ('молоко'),
+										    ('болграский перец'), ('курица'), ('консервированная фасоль'),
+                                            ('брокколи'),('морковь');
+    INSERT INTO tblRecipe (name, description, instructions, cooktime, level_id, cuisine_id, rating, imagepath) VALUES
+						  ('курица брокколи','Полезное и быстрое блюдо','1.Тушить куриное филе кусочками 10 мин, 2. Добавить морковь, соль, перец. Тушить 10 мин. 3. Добавить брокколи. Тушить 10 мин до готовности', 30,0,1,0,''),
+                          ('фахитас','Отличный обед с перчинкой', '1. Добавить болгарский перец. Тушить 10 мин. 2. Добавить кусочки куриного филе, соль, перец. Тушить 10 мин. 3 Добавить консервированную фасоль. Тушить 10 мин до готовности', 30,0,3,0,''),
+                          ('омлет', 'Традиционный рецепт омлета', '2. Взбить молоко и яйца в блендере. Жарить на медленном огне под закрытой крышкой', 10,0,1,0,''),
+                          ('банановый творожный крем','Питательный и полезный вариант для завтрака', '1. Взбить творог и банан ручным блендером до констенции крема', 5,0,1,0,'');
+	INSERT INTO	tblRecipeCourse (recipe_id, course_id) VALUES (1,1),(2,1),(3,1),(4,1);
+    INSERT INTO	tblRecipeFoodCategory (recipe_id, food_category_id) VALUES (1,5),(2,5),(3,5),(4,1);
+    INSERT INTO tblRecipeMeals (recipe_id, meal_id) VALUES (1,2),(2,2),(3,1),(4,1);
+    INSERT INTO tblRecipeIngredient (recipe_id, ingredient_id, measurement_id , amount) VALUES (1,8,1,400),(1,9,1,300),(1,6,1,400),(2,5,1,300),(2,6,1,400),(2,7,1,200),
+																													  (3,4,1,40),(3,3,2,100),(4,1,1,250),(4,2,1,100);
+									
+    
+						
+    

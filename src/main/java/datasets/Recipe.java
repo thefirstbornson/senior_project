@@ -2,7 +2,6 @@ package datasets;
 
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,9 +22,8 @@ public class Recipe {
     @Column(name="instructions")
     private String instructions;
 
-    @Column(name="cooktime", columnDefinition="TIME")
-    @Temporal(TemporalType.TIME)
-    private  Date cooktime;
+    @Column(name="cooktime")
+    private  int cooktime;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id", nullable = false)
@@ -143,14 +141,13 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public Date getCooktime() {
+    public int getCooktime() {
         return cooktime;
     }
 
-    public void setCooktime(Date cooktime) {
+    public void setCooktime(int cooktime) {
         this.cooktime = cooktime;
     }
-
 
     public int getRating() {
         return rating;
@@ -168,7 +165,7 @@ public class Recipe {
         this.imagepath = imagepath;
     }
 
-    public Recipe( String name, String description, String instructions, Date cooktime, Level level, Cuisine cousine, int rating, String imagepath) {
+    public Recipe( String name, String description, String instructions, int cooktime, Level level, Cuisine cousine, int rating, String imagepath) {
         this.name = name;
         this.description = description;
         this.instructions = instructions;
