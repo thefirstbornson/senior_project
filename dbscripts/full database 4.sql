@@ -1,9 +1,9 @@
 use recipes;
-select tr.name, tr.description, tr.instructions,ti.name, tc.course, tf.food_category, tm.meal
+select tr.name, tr.description, tr.instructions,ti.name  , tc.course, tf.food_category, tm.meal
 		,(select sum(tri2.amount)
 		  from tblrecipeingredient as tri2
           where tri2.recipe_id = tri.recipe_id)as weight
-        ,(select  tin3.amount
+        ,(select  SUM(tin3.amount)
           from tblrecipeingredient as tri3
             join tblingredient as ti3 
  			 on tri3.ingredient_id = ti3.ingredient_id
@@ -13,7 +13,7 @@ select tr.name, tr.description, tr.instructions,ti.name, tc.course, tf.food_cate
               on tin3.ni_id=tn3.nutrition_infromation_id
           where  tn3.nutrition_infromation_id=1
 			and tri3.recipe_id = tri.recipe_id ) as Protein
-         ,(select  tin3.amount
+         ,(select  SUM(tin3.amount)
           from tblrecipeingredient as tri3
             join tblingredient as ti3 
  			 on tri3.ingredient_id = ti3.ingredient_id
@@ -23,7 +23,7 @@ select tr.name, tr.description, tr.instructions,ti.name, tc.course, tf.food_cate
               on tin3.ni_id=tn3.nutrition_infromation_id
           where  tn3.nutrition_infromation_id=2
 			and tri3.recipe_id = tri.recipe_id ) as Fat  
-         ,(select  tin3.amount
+         ,(select  SUM(tin3.amount)
           from tblrecipeingredient as tri3
             join tblingredient as ti3 
  			 on tri3.ingredient_id = ti3.ingredient_id
@@ -41,7 +41,7 @@ from   tblrecipe as tr
   join tblingredient as ti
     on tri.ingredient_id = ti.ingredient_id
   join tblrecipecourse as trc
-	on tr.recipe_id = tr.recipe_id
+ 	on tr.recipe_id = trc.recipe_id
   join tblcourse as tc
     on trc.course_id = tc.course_id
   join tblrecipefoodcategory as trf
