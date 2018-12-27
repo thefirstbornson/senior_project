@@ -175,4 +175,23 @@ public class Recipe {
         this.rating = rating;
         this.imagepath = imagepath;
     }
+
+    @Override
+    public  final String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", cooktime=" + cooktime +
+                ", level=" + level +
+                ", cousine=" + cousine +
+                ", rating=" + rating +
+                ", imagepath='" + imagepath + '\'' +
+                ", recipeIngredients=" + recipeIngredients +
+                ", courses=" + courses +
+                ", foodCategories=" + foodCategories +
+                ", meals=" + meals +
+                '}';
+    }
 }

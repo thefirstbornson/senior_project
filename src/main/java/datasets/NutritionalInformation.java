@@ -46,4 +46,13 @@ public class NutritionalInformation {
     public void setIngredientsNutritionInformation(Set<IngredientNutritionalInformation> ingredientsNutritionInformation) {
         this.ingredientsNutritionInformation = ingredientsNutritionInformation;
     }
+
+    @Override
+    public final  String toString() {
+        return "NutritionalInformation{" +
+                "id=" + id +
+                ", nutrition='" + nutrition + '\'' +
+                ", ingredientsNutritionInformation=" + ingredientsNutritionInformation +
+                '}';
+    }
 }

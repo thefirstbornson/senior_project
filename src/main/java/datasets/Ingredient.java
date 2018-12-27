@@ -18,6 +18,15 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
 
+    @Override
+    public final String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", recipeIngredients=" + recipeIngredients +
+                '}';
+    }
+
     public Ingredient(){}
 
     public Ingredient(String name) {

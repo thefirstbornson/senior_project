@@ -26,10 +26,6 @@ public class FoodCategory {
         this.foodCategory = foodCategory;
     }
 
-//    public void addRecipeFoodCategory(RecipeFoodCategory recipeFoodCategory) {
-//        this.recipeFoodCategorys.add(recipeFoodCategory);
-//    }
-
     public long getId() {
         return id;
     }
@@ -42,13 +38,11 @@ public class FoodCategory {
         this.foodCategory = foodCategory;
     }
 
-//    public Set<RecipeFoodCategory> getRecipeFoodCategory() {
-//        return recipeFoodCategorys;
-//    }
-//
-//    public void setRecipeFoodCategory(Set<RecipeFoodCategory> recipeFoodCategory) {
-//        this.recipeFoodCategorys = recipeFoodCategory;
-//    }
-
-
+    @Override
+    public final String toString() {
+        return "FoodCategory{" +
+                "id=" + id +
+                ", foodCategory='" + foodCategory + '\'' +
+                '}';
+    }
 }

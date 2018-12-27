@@ -49,4 +49,13 @@ public class Cuisine {
     public void addRecipe(Recipe recipe) {
         this.recipes.add(recipe);
     }
+
+    @Override
+    public  final String toString() {
+        return "Cuisine{" +
+                "id=" + id +
+                ", cuisine='" + cuisine + '\'' +
+                ", recipes=" + recipes +
+                '}';
+    }
 }

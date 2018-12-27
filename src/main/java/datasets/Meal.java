@@ -31,4 +31,12 @@ public class Meal {
     public void setMeal(String meal) {
         this.meal = meal;
     }
+
+    @Override
+    public final  String toString() {
+        return "Meal{" +
+                "id=" + id +
+                ", meal='" + meal + '\'' +
+                '}';
+    }
 }

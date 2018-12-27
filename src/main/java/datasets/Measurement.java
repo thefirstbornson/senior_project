@@ -26,12 +26,21 @@ public class Measurement {
         return id;
     }
 
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public final  String toString() {
+        return "Measurement{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
 }
