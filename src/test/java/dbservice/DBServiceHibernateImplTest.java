@@ -2,7 +2,10 @@ package dbservice;
 
 import datasets.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -10,9 +13,13 @@ public class DBServiceHibernateImplTest {
     private Recipe recipe;
     DBService dbService;
 
+    public DBServiceHibernateImplTest() {
+        this.dbService = new DBServiceHibernateImpl("seniorproject.jpa.hibernate.h2" );
+    }
+
+
     @Before
     public void initialize() {
-        dbService = new DBServiceHibernateImpl("seniorproject.jpa.hibernate.h2" );
         recipe = new DBServiceHibernateImplTest().createRecipe();
         System.out.println(recipe.getId());
     }
@@ -39,6 +46,13 @@ public class DBServiceHibernateImplTest {
         long id =6;
         dbService.save(recipe);
         dbService.load(Recipe.class,id).getId();
+    }
+
+    @Test
+    public void loadRecipeByCriteria(){
+        dbService.save(recipe);
+        List<Recipe> recipes= dbService.loadRecipeByCriteria(Recipe.class,1,1,1);
+        assertTrue("Проверка возврата списка рецептов согласно критериям",recipes.size()>0);
     }
 
     private Recipe createRecipe() {

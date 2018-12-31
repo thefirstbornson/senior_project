@@ -43,6 +43,7 @@ public class DBServiceHibernateImpl implements DBService {
         return dataset;
     }
 
+    @Override
     public List<Recipe> loadRecipeByCriteria(Class<Recipe> clazz, long foodCategoryID,long courseID,long mealID){
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -51,18 +52,11 @@ public class DBServiceHibernateImpl implements DBService {
         Join<Recipe,FoodCategory> foodCategoriesJoin = recipeRoot.join("foodCategories");
         Join<Recipe,Course> courseJoin = recipeRoot.join("courses");
         Join<Recipe,Meal> mealJoin = recipeRoot.join("meals");
-        criteria.where(builder.equal(foodCategoriesJoin.get("id"),foodCategoryID));
-        criteria.where(builder.equal(courseJoin.get("id"),courseID));
-        criteria.where(builder.equal(mealJoin.get("id"),mealID));
+        criteria.where(builder.and(
+                               builder.equal(foodCategoriesJoin.get("id"),foodCategoryID)),
+                               builder.equal(courseJoin.get("id"),courseID),
+                               builder.equal(mealJoin.get("id"),mealID));
         return entityManager.createQuery(criteria).getResultList();
-
-
-//        CriteriaBuilder cb = em.getCriteriaBuilder(); //creted from EntityManager instance
-//        CriteriaQuery<Long> cq = cb.createQuery(Collaborator.class);
-//        Root<Answer> rootAnswer = cq.from(Answer.class);
-//        Join<Collaborator,Answer> joinAnswerCollaborator = rootAnswer.join("collaborators"); //(or rootAnswer.join(Answer_.collaborators); if you've created the metamodel with JPA2
-
-
     }
 
 
