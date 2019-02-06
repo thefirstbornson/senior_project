@@ -24,8 +24,9 @@ public class DBServiceHibernateImpl implements DBService {
     }
 
     public DBServiceHibernateImpl(String persistenceUnitname) {
-        entityManagerFactory = Persistence.createEntityManagerFactory( persistenceUnitname);
+        entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnitname);
         entityManager = entityManagerFactory.createEntityManager();
+
     }
 
     @Override
